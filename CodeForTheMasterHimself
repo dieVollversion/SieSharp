@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+
+namespace VocabTrainer
+{
+    struct XMLInput
+    {
+        public List<string> engTerm;
+        public List<string> deTerm;
+
+
+
+        // following code needs to be rewritten:
+
+        public static void start()
+        {
+            var xml = XDocument.Load(@"../../XML_data/vocabulary.xml");
+
+            var foreignLanguages = from foreignLanguage in xml.Root.Descendants("row").Descendants("Fremdsprache")
+                                   select foreignLanguage.Value;
+
+            var foreignLanguagesList = foreignLanguages.ToList();
+
+            var translationToDe = from transl in xml.Root.Descendants("row").Descendants("Deutsch")
+                                  select transl.Value;
+
+            var translationToDeToList = translationToDe.ToList();
+
+            Console.WriteLine(foreignLanguagesList[1]);
+
+            Console.WriteLine(translationToDeToList[1]);
+
+            Console.ReadLine();
+        }
+    }
+
+}
